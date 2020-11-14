@@ -75,12 +75,53 @@ const newItem = async () => {
 };
 
 const placeBid = () => {
-	const query = connection.query("SELECT * FROM listings", function (err, res) {
+	const query = connection.query("SELECT * FROM listings", function (err, results) {
 		if (err) throw err;
-		var itemNames = res.map(item =>
-			item.item
-		);
-		console.log(res);
-		console.log(itemNames);
-	});
-};
+		inquirer
+		  .prompt([
+			{
+			  name: 'choice',
+			  type: 'rawlist',
+			  choices: () => {
+				const choiceArray = results.map((r) => r.item);
+				return choiceArray;
+			  },
+			  message: 'What auction would you like to bid on?',
+			},
+			{
+			  name: 'bid',
+			  type: 'input',
+			  message: 'How much would you like to bid?',
+			},
+		  ])
+		  .then((answer) => {
+			let chosenItem;
+			for (let i = 0; i < results.length; i++) {
+			  if (results[i].item === answer.choice) {
+				chosenItem = results[i];
+			  }
+			}
+			if (chosenItem.highestbid < parseInt(answer.bid)) {
+			  connection.query(
+				'UPDATE listings SET ? WHERE ?',
+				[
+				  {
+					highestbid: answer.bid,
+				  },
+				  {
+					id: chosenItem.id,
+				  },
+				],
+				(error) => {
+				  if (error) throw err;
+				  console.log('Bid placed successfully!');
+				  promptAuctionOptions();
+				}
+			  );
+			} else {
+			  console.log('Your bid was too low. Try again...');
+			  promptAuctionOptions();
+			}
+		  });
+		});
+	};

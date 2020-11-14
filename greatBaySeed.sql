@@ -8,12 +8,12 @@ CREATE TABLE listings (
   id INT NOT NULL AUTO_INCREMENT,
   item VARCHAR(50) NOT NULL,
   currentbid INT DEFAULT (10) NOT NULL,
-  highestbid INT NULL,
+  highestbid INT DEFAULT (0) NOT NULL,
   PRIMARY KEY (id)
 );
 
-INSERT INTO listings (item, currentbid)
-VALUES ("PS5", 2000), ("old thinkpad", 480)
+INSERT INTO listings (item, currentbid, highestbid)
+VALUES ("PS5", 2000, 0), ("old thinkpad", 480, 0)
 
 -- ### Alternative way to insert more than one row
 -- INSERT INTO products (flavor, price, quantity)
