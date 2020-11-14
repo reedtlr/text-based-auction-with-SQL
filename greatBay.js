@@ -77,9 +77,9 @@ const newItem = async () => {
 const placeBid = () => {
 	const query = connection.query("SELECT * FROM listings", function (err, res) {
 		if (err) throw err;
-		var itemNames = res.map((listing) => {
-			RowDataPacket.item;
-		});
+		var itemNames = res.map(item =>
+			item.item
+		);
 		console.log(res);
 		console.log(itemNames);
 	});
