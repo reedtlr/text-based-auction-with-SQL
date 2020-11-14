@@ -1,0 +1,23 @@
+{
+  "name": "text-based-auction-with-sql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "greatBay.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reedtlr/text-based-auction-with-SQL.git"
+  },
+  "author": "Dexter Garner, Brendon Stahl, Reed Taylor, Damon Melo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reedtlr/text-based-auction-with-SQL/issues"
+  },
+  "homepage": "https://github.com/reedtlr/text-based-auction-with-SQL#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
+}
